@@ -19,4 +19,9 @@ export const logoutUser = async()=>{
 }
 // get current user
 
+export const getCurrentUser = async(emailId)=>{
+    const response = await AxiosInstance.get(`/users/email/${emailId}`)
+    return response.data;
+}
+
 // refresh token
