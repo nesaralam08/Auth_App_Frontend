@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { handleError, handleSuccess } from "../utils/Toast";
 import { registerUser } from "../services/AuthService";
 import { useAuthStore } from "../auth/Store";
+import OAuth2Button from "./OAuth2Button";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -61,7 +62,7 @@ export default function SignupPage() {
 
     try {
       const result = await registerUser(form);
-      console.log(result);
+      // console.log(result);
       handleSuccess("User register successfully");
       setForm({ name: "", email: "", password: "" });
       setLoading(false);
@@ -181,15 +182,7 @@ export default function SignupPage() {
           <div className="divider">OR</div>
 
           {/* Social Signup */}
-          <div className="flex flex-col gap-3">
-            <Link className="btn bg-base-200 hover:bg-base-300 w-full flex items-center gap-2">
-              🌐 Continue with Google
-            </Link>
-
-            <Link className="btn bg-base-200 hover:bg-base-300 w-full flex items-center gap-2">
-              🐙 Continue with GitHub
-            </Link>
-          </div>
+          <OAuth2Button/>
         </div>
       </motion.div>
     </div>

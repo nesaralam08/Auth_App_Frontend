@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import { loginUser} from "../services/AuthService";
 import { handleSuccess,handleError } from "../utils/Toast";
 import { useAuthStore } from "../auth/Store";
+import OAuth2Button from "./OAuth2Button";
 
 
 export default function LoginPage() {
@@ -47,7 +48,7 @@ export default function LoginPage() {
       
     
       try {
-        const result = await loginUser(loginData)
+        const result = await loginUser(loginData);
         // console.log(result)
         setAuth(result.user,result.accessToken,true);
         handleSuccess("Logged In successfully")
@@ -57,7 +58,7 @@ export default function LoginPage() {
     
       } catch (error) {
         console.error("Error:", error);
-        handleError("Somethin went wrong")
+        handleError(error.message || "Login Failed !!")
       }finally{
         setLoading(false);
       }
@@ -148,17 +149,7 @@ export default function LoginPage() {
           <div className="divider">OR</div>
 
           {/* Social Login */}
-          <div className="flex flex-col gap-3">
-
-            <Link className="btn bg-base-200 hover:bg-base-300 w-full flex items-center gap-2">
-              <span>🌐</span> Continue with Google
-            </Link>
-
-            <Link className="btn btn-outline bg-base-200 hover:bg-base-300 w-full flex items-center gap-2">
-              <span>🐙</span> Continue with GitHub
-            </Link>
-
-          </div>
+          <OAuth2Button/>
 
         </div>
       </motion.div>

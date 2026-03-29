@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { logoutUser } from "../services/AuthService";
 
-const LOCAL_KEY = "auth_state";
+const LOCAL_KEY = "auth_storage";
 export const useAuthStore = create(
   persist(
     (set,get) => ({
@@ -28,6 +28,14 @@ export const useAuthStore = create(
       isLogin:()=>{
         if(get().authStatus && get().accessToken) return true;
         else return false;
+      }
+      ,
+      changeLocalLoginData:(accessToken,user,authStatus)=>{
+        set({
+          accessToken,
+          user,
+          authStatus
+        })
       }
     }),
     {

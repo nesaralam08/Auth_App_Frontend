@@ -9,6 +9,8 @@ import NotFound from '../utils/NotFound'
 import UserDashboard from '../users/UserDashboard'
 import UserLayout from '../users/UserLayout'
 import UserProfile from '../users/UserProfile'
+import OAuthSuccess from '../auth/OAuthSuccess'
+import OAuthFailure from '../auth/OAuthFailure'
 
 function Routers() {
   return (
@@ -22,6 +24,8 @@ function Routers() {
               <Route index element={<UserDashboard/>}></Route>
               <Route path='profile' element={<UserProfile/>}></Route>
             </Route>
+            <Route path='/oauth/success' element={<OAuthSuccess/>}></Route>
+            <Route path='/oauth/failure' element={<OAuthFailure/>}></Route>
             <Route path='*' element={<NotFound/>}></Route>
         </Routes>
         <Footer/>
