@@ -12,10 +12,10 @@ export default function UserDashboard() {
   const fetchCurrentUser = async()=>{
     try {
       const data = await getCurrentUser(user?.email);
-      // console.log(data)
+      console.log(data)
       handleSuccess(data?.name)
     } catch (error) {
-      handleError("Error in Getting Data.")
+      handleError(error?.message || "Error in Getting Data.")
       console.log(error);
     }
   }

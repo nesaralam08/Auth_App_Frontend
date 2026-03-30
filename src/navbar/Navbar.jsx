@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../auth/Store";
 import { handleError, handleSuccess } from "../utils/Toast";
+import { HiOutlineLogout } from "react-icons/hi";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,22 +47,32 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6">
-          
           {isLogin() ? (
-            <Link
-              className="hover:text-primary transition cursor-pointer"
-              to="/dashboard"
-            >
-              Dashboard
-            </Link>
+            <>
+              <Link
+                className="hover:text-primary transition cursor-pointer"
+                to="/dashboard"
+              >
+                Dashboard
+              </Link>
+              <Link
+                className="hover:text-primary transition cursor-pointer"
+                to="/dashboard/profile"
+              >
+                Profile
+              </Link>
+            </>
           ) : (
-            <a className="hover:text-primary transition cursor-pointer">
-              Workflow
-            </a>
+            <>
+              <a className="hover:text-primary transition cursor-pointer">
+                Workflow
+              </a>
+              <a className="hover:text-primary transition cursor-pointer">
+                Features
+              </a>
+            </>
           )}
-          <a className="hover:text-primary transition cursor-pointer">
-            Features
-          </a>
+
           <a className="hover:text-primary transition cursor-pointer">
             Pricing
           </a>
@@ -94,7 +105,8 @@ export default function Navbar() {
                 className="btn bg-primary text-white rounded-full px-4 md:px-6 shadow-lg"
                 onClick={handleLogout}
               >
-                Logout
+                Sign Out
+                <HiOutlineLogout className="text-xl" />
               </button>
             </>
           ) : (
@@ -123,7 +135,24 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
+      {isOpen && isLogin() && (
+        <div className="md:hidden px-6 pb-4 bg-base-100/90 backdrop-blur-xl border-t border-base-300">
+          <div className="flex flex-col gap-4 mt-4">
+            <Link className="hover:text-primary" to="/dashboard">
+              Dasboard
+            </Link>
+            <Link className="hover:text-primary" to="/dashboard/profile">
+              Profile
+            </Link>
+            <a className="hover:text-primary">Pricing</a>
+            <Link className="btn btn-outline" to="/login">
+              Login
+            </Link>
+          </div>
+        </div>
+      )}
+      {/* without login */}
+      {isOpen && !isLogin() && (
         <div className="md:hidden px-6 pb-4 bg-base-100/90 backdrop-blur-xl border-t border-base-300">
           <div className="flex flex-col gap-4 mt-4">
             <a className="hover:text-primary">Features</a>

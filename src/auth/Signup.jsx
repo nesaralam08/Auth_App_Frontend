@@ -5,6 +5,7 @@ import { handleError, handleSuccess } from "../utils/Toast";
 import { registerUser } from "../services/AuthService";
 import { useAuthStore } from "../auth/Store";
 import OAuth2Button from "./OAuth2Button";
+import { IoIosCreate } from "react-icons/io";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -58,8 +59,6 @@ export default function SignupPage() {
     e.preventDefault();
     setLoading(true);
 
-    if (Object.keys(errors).length > 0) return;
-
     try {
       const result = await registerUser(form);
       // console.log(result);
@@ -68,8 +67,8 @@ export default function SignupPage() {
       setLoading(false);
       navigate("/login");
     } catch (error) {
-      console.error("Error:", error.message);
-      handleError("Somethin went wrong");
+      // console.error("Error:", error);
+      handleError(error.message);
     } finally {
       setLoading(false);
     }
@@ -162,7 +161,7 @@ export default function SignupPage() {
                   wait...
                 </>
               ) : (
-                "Signup Now"
+                <><IoIosCreate className="text-xl"/> Create Account</>
               )}
             </button>
             <div className="flex justify-center">

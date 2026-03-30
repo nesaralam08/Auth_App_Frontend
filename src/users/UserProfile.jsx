@@ -56,7 +56,8 @@ export default function UserProfile() {
             {/* Info */}
             <div className="space-y-2 text-sm opacity-80">
               <p>Status:{user?.enable ? "Activate" : "Deactivate"}</p>
-              <p>Role: User</p>
+              {/* {console.log(user?.roles[0]?.name)} */}
+              <p>Role: {user?.roles[0]?.name || "GUEST"}</p>
             </div>
 
             {/* Actions */}

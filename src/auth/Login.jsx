@@ -5,6 +5,7 @@ import { loginUser} from "../services/AuthService";
 import { handleSuccess,handleError } from "../utils/Toast";
 import { useAuthStore } from "../auth/Store";
 import OAuth2Button from "./OAuth2Button";
+import { PiSignInBold } from "react-icons/pi";
 
 
 export default function LoginPage() {
@@ -90,6 +91,7 @@ export default function LoginPage() {
 
             {/* Email */}
             <div>
+              
               <input
                 type="email"
                 placeholder="Email address"
@@ -129,7 +131,7 @@ export default function LoginPage() {
             {/* Login Button */}
             <button className="btn bg-primary text-white w-full shadow-lg" type="submit" disabled={loading}>
               {
-                loading ? <><span className="loading loading-spinner loading-sm"/> Please wait...</>  : "Login Now" 
+                loading ? <><span className="loading loading-spinner loading-sm"/> Please wait...</>  : <><PiSignInBold/> Sign In</>
               }
             </button>
             <div className="flex justify-center">
